@@ -1,0 +1,157 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+/* Wadah form tambah dan edit */
+.container {
+    max-width: 500px;
+}
+
+/* Wadah halaman daftar buku dan pencarian */
+.container-tabel {
+    max-width: 900px;
+}
+
+form > div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td form {
+    display: inline;
+}
+
+/* Tombol */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary { background-color: #0d6efd; }
+.btn-warning { background-color: #ffc107; color: #000; }
+.btn-danger  { background-color: #dc3545; }
+
+.float-end {
+    float: right;
+    margin: 10px 0 10px 10px;
+}
+
+/* Notifikasi */
+.alert-success,
+.alert-warning {
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffecb5;
+}
+
+.alert-warning h4 {
+    margin: 0 0 10px 0;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    border-radius: 4px;
+    padding: 10px 10px 10px 30px;
+    margin-bottom: 15px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 4px;
+    margin: 15px 0;
+}
+
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+}
+
+.pagination li.active span {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.pagination li.disabled span {
+    color: #aaa;
+}
+
+/* Kalender datepicker */
+#kalender .datepicker {
+    position: static !important;
+    width: fit-content;
+    margin-top: 6px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#kalender .datepicker:before,
+#kalender .datepicker:after {
+    display: none;
+}

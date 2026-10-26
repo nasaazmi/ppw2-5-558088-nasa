@@ -1,103 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Buku</title>
+@extends('layout.master')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-        }
+@section('content')
+<div class="container-tabel">
 
-        h1 {
-            margin-bottom: 20px;
-        }
+    @if (Session::has('pesan'))
+        <div class="alert alert-success">{{ Session::get('pesan') }}</div>
+    @endif
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+    <h4>Data Buku</h4>
 
-        th, td {
-            border: 1px solid #000;
-            padding: 10px;
-            text-align: left;
-        }
+    <a href="{{ route('buku.create') }}" class="btn btn-primary float-end">Tambah Buku</a>
 
-        th {
-            background-color: #f2f2f2;
-            text-align: center;
-        }
-
-        td:first-child {
-            text-align: center;
-        }
-
-        .info {
-            margin-top: 10px;
-            font-size: 16px;
-        }
-
-        .info p {
-            margin: 12px 0;
-        }
-    </style>
-</head>
-
-<body>
-
-    <h1>Data Buku</h1>
+    <form action="{{ route('buku.search') }}" method="get">
+        <input type="text" name="kata" class="form-control" placeholder="Cari ..."
+               style="width: 30%; display: inline; margin-top: 10px; margin-bottom: 10px; float: right;">
+    </form>
 
     <table>
         <thead>
             <tr>
-                <th>id</th>
-                <th>Judul Buku</th>
+                <th>No</th>
+                <th>Judul</th>
                 <th>Penulis</th>
                 <th>Harga</th>
-                <th>Tanggal Terbit</th>
+                <th>Tgl. Terbit</th>
                 <th>Aksi</th>
             </tr>
         </thead>
-
         <tbody>
-            @foreach($data_buku as $buku)
+            @forelse ($data_buku as $buku)
                 <tr>
-                    <td>{{ $buku->id }}</td>
-
+                    <td>{{ ++$no }}</td>
                     <td>{{ $buku->judul }}</td>
-
                     <td>{{ $buku->penulis }}</td>
-
+                    <td>{{ "Rp. ".number_format($buku->harga, 0, ',', '.') }}</td>
+                    <td>{{ $buku->tgl_terbit->format('d/m/Y') }}</td>
                     <td>
-                        {{ "Rp. ".number_format($buku->harga, 2, ',', '.') }}
-                    </td>
-
-                    <td>
-                        {{ $buku->tgl_terbit->format('d/m/Y') }}
-                    </td>
-
-                    <td style="text-align: center;">
-                        -
+                        <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('buku.destroy', $buku->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Yakin mau di hapus?')" type="submit"
+                                    class="btn btn-danger">Hapus</button>
+                        </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6">Belum ada data buku.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
-    <div class="info">
-        <p>
-            Jumlah Data Buku: {{ $jumlah_buku }}
-        </p>
+    <div>{{ $data_buku->links() }}</div>
+    <div><strong>Jumlah Buku: {{ $jumlah_buku }}</strong></div>
+    <p>
+        Total Harga Semua Buku:
+        Rp. {{ number_format($total_harga, 0, ',', '.') }}
+    </p>
 
-        <p>
-            Total Harga Semua Buku:
-            {{ "Rp. ".number_format($total_harga, 2, ',', '.') }}
-        </p>
-    </div>
-
-</body>
-</html>
+</div>
+@endsection

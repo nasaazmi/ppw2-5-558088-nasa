@@ -12,6 +12,6 @@ class buku extends Model
     protected $table = 'Buku';
 
     protected $casts = [
-    'tgl_terbit' => 'date',
-];
+    'tgl_terbit' => 'date',];
+    protected $dates = ['tgl_terbit'];
 }
