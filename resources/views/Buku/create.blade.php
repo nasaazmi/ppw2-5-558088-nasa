@@ -1,44 +1,47 @@
-@extends('layout.master')
+@extends('layouts.master')
 
 @section('content')
-<div class="container">
-    <h4>Tambah Buku</h4>
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white"><h5 class="mb-0">Tambah Buku</h5></div>
+            <div class="card-body">
 
-    @if (count($errors) > 0)
-        <ul class="alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-    <form method="post" action="{{ route('buku.store') }}">
-        @csrf
-
-        <div>
-            <label>Judul</label>
-            <input type="text" name="judul" value="{{ old('judul') }}">
+                <form method="post" action="{{ route('buku.store') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Judul</label>
+                        <input type="text" name="judul" class="form-control" value="{{ old('judul') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Penulis</label>
+                        <input type="text" name="penulis" class="form-control" value="{{ old('penulis') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Harga</label>
+                        <input type="text" name="harga" class="form-control" value="{{ old('harga') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tanggal Terbit</label>
+                        <input type="text" id="tgl_terbit" name="tgl_terbit" class="form-control"
+                               placeholder="yyyy/mm/dd" value="{{ old('tgl_terbit') }}" autocomplete="off">
+                        <div id="kalender"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
+                </form>
+            </div>
         </div>
-
-        <div>
-            <label>Penulis</label>
-            <input type="text" name="penulis" value="{{ old('penulis') }}">
-        </div>
-
-        <div>
-            <label>Harga</label>
-            <input type="text" name="harga" value="{{ old('harga') }}">
-        </div>
-
-        <div>
-            <label>Tanggal Terbit</label>
-            <input type="text" id="tgl_terbit" name="tgl_terbit" class="form-control"
-                   placeholder="yyyy/mm/dd" value="{{ old('tgl_terbit') }}" autocomplete="off">
-            <div id="kalender"></div>
-        </div>
-
-        <button type="submit">Simpan</button>
-        <a href="{{ url('/buku') }}">Kembali</a>
-    </form>
+    </div>
 </div>
 @endsection
